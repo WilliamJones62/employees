@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<table id="normal_dt"  class="stripe" class="mytable" class="display" cellspacing="0" >
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Cost Center</th>
+      <th>Company</th>
+      <th>Department</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.Employee_Status %></td>
+        <td><%= employee.Cost_Center_Code %></td>
+        <% if employee.Department == "WHS" || employee.Department == "LOG" %>
+          <td> INC </td>
+        <% else %>
+          <td> LLC </td>
+        <% end %>
+        <td><%= employee.Department %></td>
+        <td><%= employee.Firstname + ' ' + employee.Lastname %></td>
+        <td><%= employee.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

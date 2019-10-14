@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<table id="normal_dt"  class="stripe" class="mytable" class="display" cellspacing="0" >
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Cost Center</th>
+      <th>Department</th>
+      <th>Name</th>
+      <th>Picture</th>
+      <th>Show</th>
+      <% if user_signed_in? %>
+        <th>Edit</th>
+        <th>Delete</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.Employee_Status %></td>
+        <td><%= employee.Cost_Center_Code %></td>
+        <td><%= employee.Department %></td>
+        <td><%= employee.Firstname + ' ' + employee.Lastname %></td>
+        <% if !employee.image.blank? %>
+          <td><%= image_tag employee.image.thumb.url, class: "img-circle" %></td>
+        <% else %>
+          <td><%= image_tag ("/assets/DArtagnan_Logo_2015_CMYK_tiny.jpg") %></td>
+        <% end %>
+        <td><%= link_to 'Show', employee, class: "btn btn-primary" %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Edit', edit_employee_path(employee), class: "btn btn-primary" %></td>
+          <td><%= link_to 'Delete', employee, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if user_signed_in? %>
+  <br>
+  <%= link_to 'New employee', new_employee_path, class: "btn btn-primary" %>
+<% end %>

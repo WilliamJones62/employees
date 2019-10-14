@@ -1,0 +1,82 @@
+<%= form_with(model: employee, local: true) do |form| %>
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> <%= form.label :Employee_Status %> </th>
+        <th> <%= form.label :Cost_Center_Code %> </th>
+        <th> <%= form.label :Department %> </th>
+        <th> <%= form.label :Lastname, "Last name" %> </th>
+        <th> <%= form.label :Firstname, "First name" %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.select :Employee_Status, @status, {}, {:value => params[:Employee_Status], id: :employee_Employee_Status} %> </td>
+        <td> <%= form.select :Cost_Center_Code, @ccs, {}, {:value => params[:Cost_Center_Code], id: :employee_Cost_Center_Code} %> </td>
+        <td> <%= form.select :Department, @departments, {}, {:value => params[:Department], id: :employee_Department} %> </td>
+        <td> <%= form.text_field :Lastname, id: :employee_Lastname %> </td>
+        <td> <%= form.text_field :Firstname, id: :employee_Firstname %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> <%= form.label :Hire_Date %> </th>
+        <th> <%= form.label :Termination_Date %> </th>
+        <th> <%= form.label :Badge_, "Badge no" %> </th>
+        <th> <%= form.label :Employee_Name %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.date_field :hire_dte, id: :employee_hire_dte %> </td>
+        <td> <%= form.date_field :termination_dte, id: :employee_termination_dte %> </td>
+        <td> <%= form.text_field :Badge_, id: :employee_Badge_ %> </td>
+        <td> <%= form.text_field :Employee_Name, id: :employee_Employee_Name %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> <%= form.label :email %> </th>
+        <th> <%= form.label :phone %> </th>
+        <th> <%= form.label :ssn4, "Last 4 of SSN" %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :email, id: :employee_email %> </td>
+        <td> <%= form.text_field :phone, id: :employee_phone %> </td>
+        <td> <%= form.text_field :ssn4, id: :ssn4 %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="field">
+    <%= form.label :image, "Photo" %>
+    <%= form.file_field :image, :value => ' ' %>
+    <% if form.object.image? %>
+      <%= image_tag form.object.image.thumb.url, class: "img-circle" %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

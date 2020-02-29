@@ -65,4 +65,4 @@ gem 'bootstrap-sass'
 # Emails
 gem 'sucker_punch'
 
-gem 'rake', '12.3.2'
+gem 'rake', '12.3.3'
